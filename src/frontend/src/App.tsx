@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect } from "react";
+import { initDatabase, getMovies, addMovie } from "./database";
+import MovieSection from "./components/MovieSection";
+import type { MovieData } from "./types";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [movies, setMovies] = useState<MovieData[]>([]);
+  const [isReady, setIsReady] = useState(false);
+
+  // useEffect runs once when the component first loads
+  useEffect(() => {
+    async function setup() {
+      await initDatabase(); // Build the table
+      const savedMovies = await getMovies(); // Grab saved data from OPFS
+      setMovies(savedMovies); // Put it in React's memory
+      setIsReady(true); // Hide the loading screen
+    }
+    setup();
+  }, []); // The empty array [] means "only run this once"
+
+  const handleAddDemoMovie = async () => {
+    await addMovie("The Matrix", true);
+    // Refresh the list after adding
+    const updatedMovies = await getMovies();
+    setMovies(updatedMovies);
+  };
+
+  if (!isReady) return <div className="p-4">Loading Database...</div>;
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="container mt-4">
+      <h1>Rate Movies!</h1>
+      <button className="btn btn-primary mb-3" onClick={handleAddDemoMovie}>
+        Add Demo Movie
+      </button>
+
+      <MovieSection movies={movies} />
+    </div>
+  );
 }
 
-export default App
+export default App;
