@@ -1,12 +1,8 @@
 import type { MovieData } from "../types";
+import styles from "./MovieCard.module.css";
 
 function MovieCard({ movie }: { movie: MovieData }) {
-  return (
-    <div>
-      <h3>{movie.title}</h3>
-      <p>{movie.user_rating}</p>
-    </div>
-  );
+  return <div></div>;
 }
 
 export default MovieCard;

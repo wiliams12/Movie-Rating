@@ -1,8 +1,10 @@
 export interface MovieData {
-  id: number;
+  image: string;
+  id: string;
   title: string;
+  overview: string;
+  releaseDate: string;
   user_rating: number;
-  // do as on the backend
 }
 
 export interface MovieDetails {}

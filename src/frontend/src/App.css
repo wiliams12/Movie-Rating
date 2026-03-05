@@ -1,0 +1,12 @@
+header, footer {
+    height: 5rem;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+body {
+    margin: 0;
+}

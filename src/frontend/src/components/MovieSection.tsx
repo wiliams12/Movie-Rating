@@ -1,5 +1,6 @@
 import type { MovieData } from "../types";
 import MovieCard from "./MovieCard";
+import "./MovieSelection.module.css";
 
 interface MovieSelectionProps {
   movies: MovieData[];

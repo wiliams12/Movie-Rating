@@ -1,0 +1,23 @@
+.list,
+.header {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.header {
+  background-color: var(--primary-color);
+}
+
+.heading {
+  margin: 0;
+  color: var(--text-main);
+}
+
+.list {
+  list-style: none;
+}
+
+.listItem {
+  color: var(--text-main);
+}

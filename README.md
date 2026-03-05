@@ -13,6 +13,8 @@ reflection on the movies you had seen
 
 - stores the average user ratings and calculates your difference from the average (but dont show it ?)
 
+- toggle list and grid views
+
 ## How to use
 
 - Get your API key and store it in an .env file in the src/backend folder
