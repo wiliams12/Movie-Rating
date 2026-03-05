@@ -13,7 +13,7 @@ export async function initDatabase() {
   `;
 }
 
-export async function addMovie(title: string, user_rating: boolean) {
+export async function addMovie(title: string, user_rating: number) {
   await sql`
     INSERT INTO movies (title, user_rating) 
     VALUES (${title}, ${user_rating})

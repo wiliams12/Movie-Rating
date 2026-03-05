@@ -3,5 +3,13 @@
     "cors": "^2.8.6",
     "express": "^5.2.1",
     "node": "^25.8.0"
-  }
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "tsx": "^4.21.0"
+  },
+  "scripts": {
+  "dev": "tsx watch --env-file=.env index.ts"
+}
 }

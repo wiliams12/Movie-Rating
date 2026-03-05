@@ -11,5 +11,9 @@ export default defineConfig({
       "Cross-Origin-Opener-Policy": "same-origin",
       "Cross-Origin-Embedder-Policy": "require-corp",
     },
+    proxy: {
+      '/search': 'http://localhost:5001',
+      '/status': 'http://localhost:5001' 
+    }
   },
 })
