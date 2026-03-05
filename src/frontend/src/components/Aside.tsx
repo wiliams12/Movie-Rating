@@ -1,5 +1,5 @@
 function Aside() {
-  return <aside className="col-md-4"></aside>;
+  return <aside></aside>;
 }
 
 export default Aside;

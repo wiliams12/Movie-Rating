@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { initDatabase, getMovies, addMovie } from "./database";
 import MovieSection from "./components/MovieSection";
+import Header from "./components/Header";
+import Aside from "./components/Aside";
+import Footer from "./components/Footer";
 import type { MovieData } from "./types";
+import "./App.css";
 
 function App() {
   const [movies, setMovies] = useState<MovieData[]>([]);
@@ -29,9 +33,9 @@ function App() {
       }
 
       const data = await response.json();
+      console.log(data);
 
       // TODO: display
-      console.log("Search Results:", data.results);
     } catch (error) {
       console.error("Failed to search for movie:", error);
     }
@@ -39,7 +43,7 @@ function App() {
 
   const getMovieDetails = async (id: string) => {
     try {
-      const response = await fetch("/search?query=" + id);
+      const response = await fetch(`/get-details?id=${id}`);
 
       // TODO: Make responsive to user query
       // comb the data and select good ones
@@ -49,8 +53,7 @@ function App() {
       }
 
       const data = await response.json();
-
-      console.log("Search Results:", data.results);
+      console.log(data);
     } catch (error) {
       console.error("Failed to retrive movie details.:", error);
     }
@@ -59,16 +62,14 @@ function App() {
   if (!isReady) return <div className="p-4">Loading Database...</div>;
 
   return (
-    <div className="container mt-4">
-      <h1>Rate Movies!</h1>
-      <button
-        className="btn btn-primary mb-3"
-        onClick={() => handleSearchMovie("Harry Potter")}
-      >
-        Add Demo Movie
-      </button>
-
+    <div>
+      <Header />
       <MovieSection movies={movies} />
+      <button onClick={() => handleSearchMovie("Star Wars")}>
+        Search Star Wars
+      </button>
+      <Aside />
+      <Footer />
     </div>
   );
 }

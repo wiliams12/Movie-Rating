@@ -7,10 +7,10 @@ interface MovieSelectionProps {
 
 function MovieSelection({ movies }: MovieSelectionProps) {
   return (
-    <div className="col-md-8">
-      <ul className="list-group">
+    <div>
+      <ul>
         {movies.map((item) => (
-          <li key={item.id} className="list-group-item">
+          <li key={item.id}>
             <MovieCard movie={item} />
           </li>
         ))}

@@ -6,11 +6,12 @@ reflection on the movies you had seen
 
 - React.js
 - Node.js
-- Bootstrap
 
 ## Motivation
 
-## Theory
+## Functionality
+
+- stores the average user ratings and calculates your difference from the average (but dont show it ?)
 
 ## How to use
 

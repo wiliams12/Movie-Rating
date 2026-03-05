@@ -4,3 +4,5 @@ export interface MovieData {
   user_rating: number;
   // do as on the backend
 }
+
+export interface MovieDetails {}
