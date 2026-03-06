@@ -68,9 +68,6 @@ function App() {
       </Header>
       <main>
         <MovieSection movies={movies} />
-        <button onClick={() => handleSearchMovie("Star Wars")}>
-          Search Star Wars
-        </button>
         <Aside />
       </main>
       <Footer />

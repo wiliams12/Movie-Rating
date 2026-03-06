@@ -1,6 +1,6 @@
 import type { MovieData } from "../types";
 import MovieCard from "./MovieCard";
-import "./MovieSelection.module.css";
+import styles from "./MovieSelection.module.css";
 
 interface MovieSelectionProps {
   movies: MovieData[];
@@ -8,15 +8,15 @@ interface MovieSelectionProps {
 
 function MovieSelection({ movies }: MovieSelectionProps) {
   return (
-    <div>
-      <ul>
+    <>
+      <ul className={styles.movieGrid}>
         {movies.map((item) => (
-          <li key={item.id}>
+          <li className={styles.movieCard} key={item.id}>
             <MovieCard movie={item} />
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 }
 

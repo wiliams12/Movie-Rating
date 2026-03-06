@@ -14,7 +14,8 @@ export default defineConfig({
     proxy: {
       '/search': 'http://localhost:5001',
       '/status': 'http://localhost:5001',
-      '/get-details': 'http://localhost:5001'
+      '/get-details': 'http://localhost:5001',
+      '/set-up': 'http://localhost:5001'
     }
   },
 })

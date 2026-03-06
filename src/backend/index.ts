@@ -1,7 +1,7 @@
 import express from "express";
 import type { Request, Response } from "express";
 import cors from "cors";
-import { discoverMovies, GetMovieDetails, getGenreText } from "./helpers.ts";
+import { discoverMovies, GetMovieDetails, getGenreText, getImageConfiguration } from "./helpers.ts";
 import { release } from "node:os";
 
 const app = express();
@@ -47,6 +47,19 @@ app.get("/get-details", async (req: Request, res: Response) => {
     const movieData = await GetMovieDetails(API, id);
 
     res.json(movieData)
+  } catch (error) {
+    console.error("Movie details request error:", error);
+    res.status(500).json({ error: "Failed to fetch data from TMDB." });
+  }
+});
+
+app.get("/set-up", async (req: Request, res: Response) => {
+  try {
+    const id = req.query.id as string;
+
+    const config = await getImageConfiguration(API);
+
+    res.json(config)
   } catch (error) {
     console.error("Movie details request error:", error);
     res.status(500).json({ error: "Failed to fetch data from TMDB." });

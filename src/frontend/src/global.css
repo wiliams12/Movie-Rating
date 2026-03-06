@@ -1,5 +1,13 @@
 :root {
-  --primary-color: #e50914;
-  --bg-dark: #141414;
-  --text-main: #ffffff;
+  --light: #f2fdff;
+  --primary-color: #e34a6f;
+  --secondary-high-contrast: #8652b7;
+  --secondary-low-contrast: #f9e900;
+  --dark: #42253b;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }

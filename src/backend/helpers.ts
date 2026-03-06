@@ -18,7 +18,7 @@ async function callAPI(API: string, url: string) {
 export async function discoverMovies(API: string, keyword: string) {
   const params = new URLSearchParams({
     query: keyword,
-    include_adult: 'true',
+    include_adult: 'false',
     page: '1',
   });
 
@@ -26,11 +26,13 @@ export async function discoverMovies(API: string, keyword: string) {
 
   const data = await callAPI(API, url);
 
-  const sortedMovies = data.results.sort((a: any, b: any) => {
-    if (!a.popularity) return 1;
-    if (!b.popularity) return -1;
+  const filteredData = data.results.filter((movie: any) => movie.vote_count > 5);
 
-    return b.popularity - a.popularity;
+  const sortedMovies = filteredData.sort((a: any, b: any) => {
+    if (!a.vote_count) return 1;
+    if (!b.vote_count) return -1;
+
+    return b.vote_count - a.vote_count;
   });
 
   return sortedMovies;
@@ -55,52 +57,7 @@ export async function getImageConfiguration(API: string) {
   const url = 'https://api.themoviedb.org/3/configuration';
 
   const data = await callAPI(API, url);
-  
+
   return data.images; 
 }
 
-// TODO: transfer to frontend
-// maybe not necessary because details gives all the genres with strings
-export function buildImageUrl(config: any, filePath: string | null, size: string = "normal", type: string) {
-  if (!filePath || !config || !config.secure_base_url) {
-    return null;
-  }
-
-  let size_w: string;
-
-  switch (type) {
-    case "backdrop":
-      if (size == "large") {
-        size_w = config.backdrop_sizes[2];
-      } else if (size == "small") {
-        size_w = config.backdrop_sizes[0];
-      } else {
-        size_w = config.backdrop_sizes[1];
-      }
-      break;
-    case "poster":
-      if (size === "large") {
-        size_w = config.poster_sizes[5];
-      } else if (size === "small") {
-        size_w = config.poster_sizes[1];
-      } else {
-        size_w = config.poster_sizes[4];
-      }
-      break;
-
-    case "logo":
-      if (size === "large") {
-        size_w = config.logo_sizes[5];
-      } else if (size === "small") {
-        size_w = config.logo_sizes[1];
-      } else {
-        size_w = config.logo_sizes[3];
-      }
-      break;
-
-    default:
-      size_w = "original";
-  }
-
-  return `${config.secure_base_url}${size}${filePath}`;
-}

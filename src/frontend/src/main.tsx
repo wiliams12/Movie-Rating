@@ -1,10 +1,10 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./global.css";
+import { ConfigProvider } from "./context/configContext";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <ConfigProvider>
     <App />
-  </StrictMode>,
+  </ConfigProvider>,
 );
