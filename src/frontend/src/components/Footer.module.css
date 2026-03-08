@@ -1,0 +1,11 @@
+.footer {
+  min-height: 10vh;
+  background-color: var(--primary-color);
+  padding-top: 1rem;
+}
+
+.Attribution {
+  text-align: center;
+  margin: auto;
+  display: block;
+}

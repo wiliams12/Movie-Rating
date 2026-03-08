@@ -23,6 +23,15 @@ reflection on the movies you had seen
 - filters out everything with less then 500 votes to exclude the most irrelevant results
 - sorts according to the vote count (popularity was also an option, but it didn't yield as good results)
 
+- The actors and crew are only sorted because filtering out unknown ones would result in lesser-known movies, not having a single actor or a crew member
+
 ## How to use
 
 - Get your API key and store it in an .env file in the src/backend folder
+- Search has to be specific
+  -> only the first results are retrieved and they are filtered and sorted only after retrieving, general queries lead to a lot of not well known results so the more relevant once are not included
+
+## Recommended browsers
+
+- Not optimised for FireFox
+- works on Safari, Edge, Chromium...

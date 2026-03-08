@@ -1,5 +1,6 @@
+import styles from "./Aside.module.css";
 function Aside() {
-  return <aside></aside>;
+  return <aside className={styles.aside}></aside>;
 }
 
 export default Aside;

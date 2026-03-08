@@ -40,6 +40,16 @@ export function buildImageUrl(
       }
       break;
 
+    case "profile":
+      if (size === "large") {
+        size_w = config.profile_sizes[2];
+      } else if (size === "small") {
+        size_w = config.profile_sizes[0];
+      } else {
+        size_w = config.profile_sizes[1];
+      }
+      break;
+
     default:
       size_w = "original";
   }

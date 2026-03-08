@@ -39,18 +39,48 @@ export async function discoverMovies(API: string, keyword: string) {
 }
 
 export async function GetMovieDetails(API: string, id: string) {
-  const url = `https://api.themoviedb.org/3/movie/${id}`;
+  const movieUrl = `https://api.themoviedb.org/3/movie/${id}`;
+  const castUrl = `https://api.themoviedb.org/3/movie/${id}/credits`
 
-  return callAPI(API, url);
+  const movieData = await callAPI(API, movieUrl);
+  const castData = await callAPI(API, castUrl);
 
-}
+  const sortedCast = castData.cast.sort((a: any, b: any) => {
+    if (!a.popularity) return 1;
+    if (!b.popularity) return -1;
 
-export async function getGenreText(API: string) {
-  const url = 'https://api.themoviedb.org/3/genre/movie/list?language=en-US';
+    return b.vote_count - a.vote_count;
+  }).slice(0, 20);
 
-  const data = await callAPI(API, url);
+  const sortedCrew = castData.crew.sort((a: any, b: any) => {
+    if (!a.popularity) return 1;
+    if (!b.popularity) return -1;
 
-  return data.genres;
+    return b.vote_count - a.vote_count;
+  }).slice(0, 20);
+
+  const formattedCrew = sortedCrew.map((person: any) => ({
+    id: person.id,
+    gender: person.gender,
+    name: person.name,
+    job: person.job,
+    character: null,
+    photo: person.profile_path,
+  }));
+
+  const formattedCast = sortedCast.map((person: any) => ({
+    id: person.id,
+    gender: person.gender,
+    name: person.name,
+    job: "Actor",
+    character: person.character,
+    photo: person.profile_path,
+  }));
+
+  movieData.crew = formattedCrew
+  movieData.cast = formattedCast;
+
+  return movieData;
 }
 
 export async function getImageConfiguration(API: string) {

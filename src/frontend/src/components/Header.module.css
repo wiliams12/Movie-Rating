@@ -1,23 +1,36 @@
-.list,
 .header {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   margin: 0;
-}
-
-.header {
   background-color: var(--primary-color);
+  min-height: 10vh;
+  gap: 10%;
 }
 
 .heading {
-  margin: 0;
+  margin: 1rem;
   color: var(--light);
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
 }
 
-.list {
-  list-style: none;
+.heading a {
+  display: flex;
+  gap: 1rem;
 }
 
-.listItem {
-  color: var(--light);
+.heading span {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 850px) {
+  .heading span {
+    display: none;
+  }
 }

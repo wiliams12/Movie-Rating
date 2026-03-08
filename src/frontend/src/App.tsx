@@ -37,24 +37,6 @@ function App() {
     }
   };
 
-  const getMovieDetails = async (id: string) => {
-    try {
-      const response = await fetch(`/get-details?id=${id}`);
-
-      // TODO: Make responsive to user query
-      // comb the data and select good ones
-
-      if (!response.ok) {
-        throw new Error(`Server Error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error("Failed to retrive movie details.:", error);
-    }
-  };
-
   if (!isReady) return <div className="p-4">Loading Database...</div>;
 
   return (

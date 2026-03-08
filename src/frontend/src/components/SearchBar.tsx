@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./SearchBar.module.css";
+import Magnify from "../assets/magnifying-glass.png";
 
 interface Props {
   onSearch: (query: string) => void;
@@ -17,6 +18,7 @@ export default function SearchBar({ onSearch }: Props) {
 
   return (
     <form className={styles.searchBox} onSubmit={handleSubmit}>
+      <img className={styles.Magnify} src={Magnify} alt="search icon" />
       <input
         type="text"
         placeholder="Search for a movie..."

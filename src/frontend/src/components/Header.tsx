@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Header.module.css";
+import iconMedium from "../assets/icon-medium.png";
 
 interface HeaderProps {
   children?: React.ReactNode;
@@ -8,14 +9,17 @@ interface HeaderProps {
 function Header({ children }: HeaderProps) {
   return (
     <header className={styles.header}>
-      <h1 className={styles.heading}>Rate Movies!</h1>
+      <h1 className={styles.heading}>
+        <a href="/">
+          <img
+            src={iconMedium}
+            alt="Rate Movies icon:  by Freepik - Flaticon"
+          />
+          <span>Rate Movies!</span>
+        </a>
+      </h1>
 
       {children}
-
-      <ul className={styles.list}>
-        <li className={styles.listItem}>Cras justo odio</li>
-        <li className={styles.listItem}>Dapibus ac facilisis in</li>
-      </ul>
     </header>
   );
 }
