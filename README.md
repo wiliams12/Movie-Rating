@@ -15,6 +15,8 @@ reflection on the movies you had seen
 
 - toggle list and grid views
 
+- Includes a test json so a person can test the app without getting his own API 
+
 ## Specs
 
 ### Search
