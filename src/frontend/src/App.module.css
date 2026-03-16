@@ -2,6 +2,7 @@ main {
   display: grid;
   grid-template-columns: 3fr 1fr;
   background-color: var(--light);
+  height: 75vh;
 }
 
 body {

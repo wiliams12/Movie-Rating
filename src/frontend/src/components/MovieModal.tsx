@@ -85,7 +85,7 @@ function MovieModal({ movieDetails }: MovieModalProps) {
         <ul className={styles.Cast}>
           {movieDetails.cast.map((item) => (
             <ProfileCardItem
-              key={item.id}
+              key={`${item.id} ${item.job}`}
               item={item}
               getImageUrl={getImageUrl}
             />
@@ -95,7 +95,7 @@ function MovieModal({ movieDetails }: MovieModalProps) {
         <ul className={styles.Crew}>
           {movieDetails.crew.map((item) => (
             <ProfileCardItem
-              key={item.id}
+              key={`${item.id} ${item.job}`}
               item={item}
               getImageUrl={getImageUrl}
             />

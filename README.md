@@ -2,6 +2,8 @@
 
 reflection on the movies you had seen
 
+## About
+
 ## Technologies
 
 - indexedDB
@@ -12,7 +14,7 @@ reflection on the movies you had seen
 
 ## Functionality
 
-- stores the average user ratings and calculates your difference from the average (but dont show it ?)
+- stores the average user ratings and calculates your difference from the average
 
 - toggle list and grid views
 
@@ -32,7 +34,7 @@ reflection on the movies you had seen
 
 - Get your API key and store it in an .env file in the src/backend folder
 - Search has to be specific
-  -> only the first results are retrieved and they are filtered and sorted only after retrieving, general queries lead to a lot of not well known results so the more relevant once are not included
+  -> only the first results are retrieved and they are filtered and sorted only after retrieving the data, general queries lead to a lot of not well known results so the more relevant ones may not included
 
 ## Recommended browsers
 

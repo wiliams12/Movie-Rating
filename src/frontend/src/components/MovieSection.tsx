@@ -69,6 +69,12 @@ function MovieSelection({ movies }: MovieSelectionProps) {
             <MovieCard movie={item} />
           </li>
         ))}
+        {movies.length === 0 && (
+          <div className={styles.noResults}>
+            <h2>No results</h2>
+            <p>Try searching with a different query</p>
+          </div>
+        )}
       </ul>
 
       {isModalOpen && movieDetails !== null && (

@@ -10,7 +10,7 @@
   margin: 0;
   padding: 2rem 4rem;
 
-  height: 80vh;
+  height: auto;
 
   overflow-y: scroll;
 
@@ -24,8 +24,6 @@
     grid-auto-columns: 18rem;
     overflow-x: auto;
     overflow-y: hidden;
-
-    height: auto;
 
     justify-content: start;
   }
@@ -103,4 +101,10 @@
   border: none;
   font-size: 1.2rem;
   font-weight: bold;
+}
+
+.noResults {
+  margin: auto;
+  grid-column: 1 / -1;
+  text-align: center;
 }
