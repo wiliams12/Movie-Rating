@@ -12,3 +12,5 @@ bootstrap.js
 *.local
 
 todo.txt
+
+.DS_Store
