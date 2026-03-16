@@ -5,6 +5,7 @@ import styles from "./MovieSelection.module.css";
 import MovieModal from "./MovieModal";
 import Cross from "../assets/cross.png";
 import type { MovieDetails } from "../types";
+import { getMovie } from "../database";
 
 interface MovieSelectionProps {
   movies: MovieData[];
@@ -15,19 +16,25 @@ function MovieSelection({ movies }: MovieSelectionProps) {
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
 
   const getMovieDetails = async (id: string) => {
-    try {
-      const response = await fetch(`/get-details?id=${id}`);
-
-      if (!response.ok) {
-        throw new Error(`Server Error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log(data);
+    const movieFromDB = await getMovie(id);
+    if (movieFromDB !== undefined) {
       setIsModalOpen(true);
-      setMovieDetails(data);
-    } catch (error) {
-      console.error("Failed to retrive movie details.:", error);
+      setMovieDetails(movieFromDB);
+    } else {
+      try {
+        const response = await fetch(`/get-details?id=${id}`);
+
+        if (!response.ok) {
+          throw new Error(`Server Error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log(data);
+        setIsModalOpen(true);
+        setMovieDetails(data);
+      } catch (error) {
+        console.error("Failed to retrive movie details.:", error);
+      }
     }
   };
 
@@ -64,7 +71,7 @@ function MovieSelection({ movies }: MovieSelectionProps) {
         ))}
       </ul>
 
-      {isModalOpen && (
+      {isModalOpen && movieDetails !== null && (
         <div className={styles.modalOverlay} onClick={closeModal}>
           <div
             className={styles.modalContent}

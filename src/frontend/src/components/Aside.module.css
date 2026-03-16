@@ -3,4 +3,17 @@
   box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.2);
   overflow-y: hidden;
   overscroll-behavior: none;
+  padding: 1rem 2rem;
+}
+
+.heading {
+}
+
+.text {
+}
+
+@media (max-width: 880px) {
+  .aside {
+    box-shadow: none;
+  }
 }

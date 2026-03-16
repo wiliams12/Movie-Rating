@@ -4,7 +4,6 @@ export interface MovieData {
   title: string;
   overview: string;
   releaseDate: string;
-  user_rating: number;
 }
 
 export interface Person {
@@ -12,7 +11,7 @@ export interface Person {
   gender: string;
   name: string;
   job: string;
-  character: string; // null if the person didn't act in the film
+  character: string;
   photo: string;
 }
 
@@ -21,6 +20,7 @@ export interface MovieDetails {
   originalTitle: string;
   id: string;
   poster: string;
+  backdrop: string;
   originCountry: string;
   originalLanguage: string;
   overview: string;
@@ -32,4 +32,6 @@ export interface MovieDetails {
   releaseDate: string;
   cast: Person[];
   crew: Person[];
+  user_rating_quality: number;
+  user_rating_entertainment: number;
 }

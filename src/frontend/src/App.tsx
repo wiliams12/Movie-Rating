@@ -1,26 +1,45 @@
 import { useState, useEffect } from "react";
-import { initDatabase, getMovies, addMovie } from "./database";
+import { initDB, getAllMovies } from "./database";
 import MovieSection from "./components/MovieSection";
 import Header from "./components/Header";
 import Aside from "./components/Aside";
 import Footer from "./components/Footer";
 import type { MovieData } from "./types";
-import "./App.css";
 import SearchBar from "./components/SearchBar";
+import Cross from "./assets/cross.png";
+import styles from "./App.module.css";
 
 function App() {
   const [movies, setMovies] = useState<MovieData[]>([]);
   const [isReady, setIsReady] = useState(false);
+  const [isAsidePopupOpen, setIsAsidePopupOpen] = useState(true);
 
   useEffect(() => {
     async function setup() {
-      await initDatabase(); // Build the table
-      const savedMovies = await getMovies(); // Grab saved data from OPFS
-      setMovies(savedMovies); // Put it in React's memory
-      setIsReady(true); // Hide the loading screen
+      await initDB();
+      const savedMovies = await getAllMovies();
+      console.log(savedMovies);
+      setMovies(savedMovies);
+      setIsReady(true);
     }
     setup();
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsAsidePopupOpen(false);
+      }
+    };
+
+    if (isAsidePopupOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  });
 
   const handleSearchMovie = async (query: string) => {
     try {
@@ -37,7 +56,7 @@ function App() {
     }
   };
 
-  if (!isReady) return <div className="p-4">Loading Database...</div>;
+  if (!isReady) return <div>Loading Database...</div>;
 
   return (
     <>
@@ -48,9 +67,34 @@ function App() {
           }}
         />
       </Header>
-      <main>
+      <main className={styles.main}>
         <MovieSection movies={movies} />
-        <Aside />
+        <div className={styles.btnWrapper}>
+          <button
+            className={styles.openAside}
+            onClick={() => setIsAsidePopupOpen(true)}
+          >
+            How to use?
+          </button>
+        </div>
+        <section className={styles.PopUpWrapper}>
+          <div
+            className={`${styles.asideOverlay} ${isAsidePopupOpen ? styles.open : ""}`}
+            onClick={() => setIsAsidePopupOpen(false)}
+          ></div>
+
+          <div
+            className={`${styles.asideWrapper} ${isAsidePopupOpen ? styles.open : ""}`}
+          >
+            <button
+              className={styles.closeBtn}
+              onClick={() => setIsAsidePopupOpen(false)}
+            >
+              <img src={Cross} alt="cross icon" />
+            </button>
+            <Aside />
+          </div>
+        </section>
       </main>
       <Footer />
     </>

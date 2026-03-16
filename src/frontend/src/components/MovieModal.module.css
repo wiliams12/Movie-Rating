@@ -137,3 +137,18 @@
   padding: 0.2rem 0.5rem;
   border-radius: 0.4rem;
 }
+
+@media (max-width: 1000px) {
+  .Wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin-top: 2rem;
+    padding: 0 4rem;
+  }
+  .Right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+}

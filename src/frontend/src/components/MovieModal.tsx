@@ -7,6 +7,8 @@ import clockImage from "../assets/clock.png";
 import calendarImage from "../assets/calendar.png";
 import moneyImage from "../assets/money.png";
 import { getFlagEmoji } from "../utils";
+import { storeMovie } from "../database";
+import ISO6391 from "iso-639-1";
 
 interface MovieModalProps {
   movieDetails: MovieDetails;
@@ -20,6 +22,21 @@ function MovieModal({ movieDetails }: MovieModalProps) {
   ).toFixed(1);
 
   const profitNumber = Number(profitString);
+
+  const handleDropWrapper = function (rating_type: string) {
+    switch (rating_type) {
+      case "quality":
+        return (value: number) => {
+          movieDetails.user_rating_quality = value;
+          storeMovie(movieDetails);
+        };
+      case "entertainment":
+        return (value: number) => {
+          movieDetails.user_rating_entertainment = value;
+          storeMovie(movieDetails);
+        };
+    }
+  };
 
   const profitClass =
     profitNumber > 0
@@ -55,7 +72,7 @@ function MovieModal({ movieDetails }: MovieModalProps) {
             {getFlagEmoji(movieDetails.originCountry[0])}
           </p>
           <p className={styles.Language}>
-            language: {movieDetails.originalLanguage}
+            language: {ISO6391.getName(movieDetails.originalLanguage)}
           </p>
         </div>
         <p> {movieDetails.overview}</p>
@@ -95,8 +112,14 @@ function MovieModal({ movieDetails }: MovieModalProps) {
           loading="lazy"
         />
         <div className={styles.Rating}>
-          <RatingBar />
-          <RatingBar />
+          <RatingBar
+            value={movieDetails.user_rating_quality}
+            handleDrop={handleDropWrapper("quality")}
+          />
+          <RatingBar
+            value={movieDetails.user_rating_entertainment}
+            handleDrop={handleDropWrapper("entertainment")}
+          />
         </div>
       </div>
     </div>

@@ -17,6 +17,26 @@
   overscroll-behavior: none;
 }
 
+@media (max-width: 800px) {
+  .movieGrid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 18rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    height: auto;
+
+    justify-content: start;
+  }
+}
+
+@media (max-width: 880px) {
+  .movieGrid {
+    overscroll-behavior: auto;
+  }
+}
+
 .movieGrid::-webkit-scrollbar-track,
 .modalContent::-webkit-scrollbar-track {
   background-color: transparent;

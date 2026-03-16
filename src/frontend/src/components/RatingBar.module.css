@@ -33,11 +33,13 @@
   border: 2px solid var(--secondary-high-contrast);
   cursor: pointer;
 
-  /* Mathematical centering: (Track Height / 2) - (Thumb Height / 2) */
-  /* (8 / 2) - (20 / 2) = 4 - 10 = -6px */
   margin-top: -6px;
 }
 
 .RatingBar {
   margin: 1rem 0;
+}
+
+.noValue::-webkit-slider-thumb {
+  visibility: hidden;
 }

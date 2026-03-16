@@ -58,6 +58,7 @@ app.get("/get-details", async (req: Request, res: Response) => {
       originCountry: data.origin_country,
       originalLanguage: data.original_language,
       poster: data.poster_path,
+      backdrop: data.backdrop_path,
       overview: data.overview,
       releaseDate: data.release_date,
       voteAverage: data.vote_average,
