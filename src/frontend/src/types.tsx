@@ -4,6 +4,8 @@ export interface MovieData {
   title: string;
   overview: string;
   releaseDate: string;
+  user_rating_quality: number;
+  user_rating_entertainment: number;
 }
 
 export interface Person {

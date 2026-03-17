@@ -1,5 +1,6 @@
 .aside {
   height: 75vh;
+  min-height: 530px;
   box-shadow:
     -8px 0 8px 0 rgba(0, 0, 0, 0.2),
     inset -8px 0 8px 0 rgba(0, 0, 0, 0.4);

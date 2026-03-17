@@ -3,6 +3,8 @@ main {
   grid-template-columns: 3fr 1fr;
   background-color: var(--light);
   height: 75vh;
+  overflow: hidden;
+  min-height: 530px;
 }
 
 body {
@@ -110,4 +112,18 @@ body::-webkit-scrollbar {
     background-color: rgba(0, 0, 0, 0.6);
     z-index: 999;
   }
+}
+
+.Content {
+  min-height: 0;
+  padding-bottom: 3rem;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.Utilities {
+  height: 3rem;
+  width: 100%;
+  background-color: var(--secondary-low-contrast);
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
 }

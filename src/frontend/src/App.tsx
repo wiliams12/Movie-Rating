@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { initDB, getAllMovies } from "./database";
 import MovieSection from "./components/MovieSection";
 import Header from "./components/Header";
@@ -8,11 +8,59 @@ import type { MovieData } from "./types";
 import SearchBar from "./components/SearchBar";
 import Cross from "./assets/cross.png";
 import styles from "./App.module.css";
+import Utils from "./components/Utils";
+import Plane from "./components/Plane";
+
+const ViewMap: Record<string, React.ElementType> = {
+  graph: Plane,
+  default: MovieSection,
+  list: MovieSection,
+};
+
+export function useViewManager(
+  rawMovies: MovieData[],
+  initialView: string = "default",
+) {
+  const [dataState, setDataState] = useState<string>(initialView);
+
+  const [sortState, setSortState] = useState<string>("default");
+
+  const displayedMovies = useMemo(() => {
+    const movieClone = [...rawMovies];
+
+    if (sortState === "rating") {
+      return movieClone.sort(
+        (a, b) => b.user_rating_quality - a.user_rating_quality,
+      );
+    }
+
+    if (sortState === "alphabetical") {
+      return movieClone.sort((a, b) => a.title.localeCompare(b.title));
+    }
+    return movieClone;
+  }, [rawMovies, sortState]);
+
+  const ActiveView = ViewMap[dataState] || ViewMap.default;
+
+  return {
+    dataState,
+    setDataState,
+    sortState,
+    setSortState,
+    ActiveView,
+    displayedMovies,
+  };
+}
 
 function App() {
   const [movies, setMovies] = useState<MovieData[]>([]);
   const [isReady, setIsReady] = useState(false);
   const [isAsidePopupOpen, setIsAsidePopupOpen] = useState(true);
+  const [isSearch, setIsSearch] = useState(false);
+  const { dataState, setDataState, ActiveView } = useViewManager(
+    movies,
+    "default",
+  );
 
   useEffect(() => {
     async function setup() {
@@ -51,6 +99,7 @@ function App() {
 
       const data = await response.json();
       setMovies(data);
+      setIsSearch(true);
     } catch (error) {
       console.error("Failed to search for movie:", error);
     }
@@ -68,7 +117,13 @@ function App() {
         />
       </Header>
       <main className={styles.main}>
-        <MovieSection movies={movies} />
+        <div className={styles.Content}>
+          <div className={styles.Utilities}>
+            <Utils changeState={setDataState} isSearch={isSearch} />
+          </div>
+          <ActiveView movies={movies} layout={dataState} />
+        </div>
+
         <div className={styles.btnWrapper}>
           <button
             className={styles.openAside}

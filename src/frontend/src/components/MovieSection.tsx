@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import type { MovieData } from "../types";
 import MovieCard from "./MovieCard";
-import styles from "./MovieSelection.module.css";
+import styles from "./MovieSection.module.css";
 import MovieModal from "./MovieModal";
 import Cross from "../assets/cross.png";
 import type { MovieDetails } from "../types";
 import { getMovie } from "../database";
+import MovieListItem from "./MovieListItem";
 
 interface MovieSelectionProps {
   movies: MovieData[];
+  layout?: "grid" | "list";
 }
 
-function MovieSelection({ movies }: MovieSelectionProps) {
+function MovieSelection({ movies, layout }: MovieSelectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
 
@@ -56,17 +58,28 @@ function MovieSelection({ movies }: MovieSelectionProps) {
     };
   });
 
+  const containerClass =
+    layout === "list" ? styles.movieList : styles.movieGrid;
+
   return (
     <>
-      <ul className={styles.movieGrid}>
+      <ul className={containerClass}>
         {movies.map((item) => (
           <li
-            className={styles.movieCard}
+            className={
+              layout === "list"
+                ? `${styles.movieListItem}`
+                : `${styles.movieCard}`
+            }
             key={item.id}
             onClick={() => getMovieDetails(item.id)}
             role="button"
           >
-            <MovieCard movie={item} />
+            {layout === "list" ? (
+              <MovieListItem movie={item} />
+            ) : (
+              <MovieCard movie={item} />
+            )}
           </li>
         ))}
         {movies.length === 0 && (

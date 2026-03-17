@@ -14,7 +14,7 @@ function Aside() {
       </p>
       <h3>Example:</h3>
       <p>
-        I will be using the rating from IMDB(17.3.2026).<br></br>
+        I will be using the rating from IMDB (17.3.2026).<br></br>
         <i>Harry Potter and the Deathly Hallows: Part 2</i> has 8.1 stars, which
         is quite a lot.<br></br> This is only my personal opinion, but maybe
         even you might feel that it has some drawbacks, when watching the film,

@@ -31,7 +31,9 @@ app.get("/search", async (req: Request, res: Response) => {
       id: movie.id,
       title: movie.title,
       overview: movie.overview,
-      releaseDate: movie.release_date
+      releaseDate: movie.release_date,
+      user_rating_quality: movie.user_rating_quality,
+      user_rating_entertainment: movie.user_rating_entertainment
     }));
     res.json(formattedResults);
   } catch (error) {

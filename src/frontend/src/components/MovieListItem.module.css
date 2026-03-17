@@ -1,0 +1,16 @@
+.Wrapper {
+  padding: 0 1rem;
+  display: flex;
+  justify-items: center;
+  transition: color var(--transition) ease;
+}
+
+.Wrapper:hover {
+  color: var(--secondary-low-contrast);
+}
+
+.movieHeading {
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+}
