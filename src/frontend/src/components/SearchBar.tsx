@@ -18,7 +18,6 @@ export default function SearchBar({ onSearch }: Props) {
 
   return (
     <form className={styles.searchBox} onSubmit={handleSubmit}>
-      <img className={styles.Magnify} src={Magnify} alt="search icon" />
       <input
         type="text"
         placeholder="Search for a movie..."
@@ -27,7 +26,7 @@ export default function SearchBar({ onSearch }: Props) {
         className={styles.input}
       />
       <button type="submit" className={styles.button}>
-        Search
+        <img className={styles.Magnify} src={Magnify} alt="search icon" />
       </button>
     </form>
   );

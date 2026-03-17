@@ -13,6 +13,17 @@ body {
   font-family: "Noto Sans", sans-serif;
 }
 
+a {
+  color: var(--dark);
+  text-decoration: none;
+  transition: color var(--transition) ease;
+}
+
+a:hover {
+  color: var(--secondary-low-contrast);
+  text-decoration: underline;
+}
+
 .asideOverlay,
 .closeBtn,
 .btnWrapper {

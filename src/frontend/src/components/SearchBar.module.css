@@ -28,14 +28,11 @@
 }
 
 .button {
-  padding: 10px 20px;
-  background-color: var(--secondary-high-contrast);
-  color: var(--light);
+  background-color: var(--light);
   border: none;
-  border-radius: 4px;
   cursor: pointer;
 }
 
 .Magnify {
-  padding: 5px;
+  height: 100%;
 }

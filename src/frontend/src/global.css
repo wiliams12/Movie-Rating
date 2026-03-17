@@ -4,6 +4,7 @@
   --secondary-high-contrast: #8652b7;
   --secondary-low-contrast: #bfbb8d;
   --dark: #42253b;
+  --transition: 0.2s;
 }
 
 *,

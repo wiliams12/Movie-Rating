@@ -1,9 +1,27 @@
 .aside {
   height: 75vh;
-  box-shadow: -8px 0 8px 0 rgba(0, 0, 0, 0.2);
-  overflow-y: hidden;
+  box-shadow:
+    -8px 0 8px 0 rgba(0, 0, 0, 0.2),
+    inset -8px 0 8px 0 rgba(0, 0, 0, 0.4);
+  overflow-y: scroll;
   overscroll-behavior: none;
   padding: 1rem 2rem;
+}
+
+.aside::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.aside::-webkit-scrollbar-thumb {
+  background-color: var(--secondary-high-contrast);
+
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 8px;
+}
+
+.aside::-webkit-scrollbar {
+  width: 1rem;
 }
 
 .heading {
