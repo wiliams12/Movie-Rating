@@ -76,7 +76,7 @@ function MovieSelection({ movies, layout }: MovieSelectionProps) {
             role="button"
           >
             {layout === "list" ? (
-              <MovieListItem movie={item} />
+              <MovieListItem movieData={item} display={""} />
             ) : (
               <MovieCard movie={item} />
             )}

@@ -112,10 +112,12 @@ function MovieModal({ movieDetails }: MovieModalProps) {
           loading="lazy"
         />
         <div className={styles.Rating}>
+          <p className={styles.label}>quality</p>
           <RatingBar
             value={movieDetails.user_rating_quality}
             handleDrop={handleDropWrapper("quality")}
           />
+          <p className={styles.label}>entertainment</p>
           <RatingBar
             value={movieDetails.user_rating_entertainment}
             handleDrop={handleDropWrapper("entertainment")}

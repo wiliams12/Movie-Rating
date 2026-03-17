@@ -49,6 +49,8 @@ export async function getAllMovies(): Promise<MovieData[]> {
     title: movieDetails.title,
     overview: movieDetails.overview,
     releaseDate: movieDetails.releaseDate,
+    user_rating_entertainment: movieDetails.user_rating_entertainment,
+    user_rating_quality: movieDetails.user_rating_quality
   }));
 }
 

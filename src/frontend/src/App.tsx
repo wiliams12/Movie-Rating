@@ -100,6 +100,9 @@ function App() {
       const data = await response.json();
       setMovies(data);
       setIsSearch(true);
+      if (dataState === "graph") {
+        setDataState("default");
+      }
     } catch (error) {
       console.error("Failed to search for movie:", error);
     }

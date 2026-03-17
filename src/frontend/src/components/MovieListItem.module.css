@@ -2,6 +2,8 @@
   padding: 0 1rem;
   display: flex;
   justify-items: center;
+  justify-content: space-between;
+  gap: 2rem;
   transition: color var(--transition) ease;
 }
 

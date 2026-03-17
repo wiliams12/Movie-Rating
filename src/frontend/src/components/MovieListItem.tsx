@@ -1,13 +1,19 @@
 import styles from "./MovieListItem.module.css";
 import type { MovieData } from "../types";
 
-function MovieListItem({ movie }: { movie: MovieData }) {
+interface Props {
+  movieData: MovieData;
+  display: string;
+}
+
+function MovieListItem({ movieData, display }: Props) {
   return (
     <div className={styles.Wrapper}>
       <h3 className={styles.movieHeading}>
-        <span className={styles.title}>{movie.title}</span>
-        <span className={styles.releaseDate}>{movie.releaseDate}</span>
+        <span className={styles.title}>{movieData.title}</span>
+        <span className={styles.releaseDate}>{movieData.releaseDate}</span>
       </h3>
+      <p>{display}</p>
     </div>
   );
 }

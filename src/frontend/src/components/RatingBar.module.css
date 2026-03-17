@@ -37,7 +37,7 @@
 }
 
 .RatingBar {
-  margin: 1rem 0;
+  margin: 0;
 }
 
 .noValue::-webkit-slider-thumb {
