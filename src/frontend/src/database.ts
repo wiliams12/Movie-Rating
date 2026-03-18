@@ -40,8 +40,6 @@ export async function getMovie(id: string): Promise<MovieDetails | undefined> {
 export async function getAllMovies(): Promise<MovieData[]> {
   const db = await initDB();
   const data = await db.getAll(STORE_NAME);
-
-  console.log(data)
   
   return data.map((movieDetails) => ({
     image: movieDetails.backdrop,

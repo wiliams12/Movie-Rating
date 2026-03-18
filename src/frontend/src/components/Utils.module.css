@@ -21,7 +21,8 @@
   overflow-x: auto;
 
   scrollbar-width: none;
-  -ms-overflow-style: none;
+
+  padding: 0.5rem;
 }
 
 .Scroll::-webkit-scrollbar {
@@ -36,6 +37,10 @@
   flex-shrink: 0;
 }
 
+.Item {
+  flex-shrink: 0;
+}
+
 .Item button {
   display: block;
   padding: 5px 10px;
@@ -44,4 +49,12 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition:
+    background-color var(--transition) ease,
+    transform var(--transition) ease;
+}
+
+.Item button:hover {
+  background-color: var(--primary-color);
+  transform: scale(1.2);
 }

@@ -34,10 +34,10 @@ function RatingBar({ value, handleDrop }: Props) {
         max="100"
         step="1"
         value={currentValue}
-        onPointerUp={() => {
-          handleDrop(currentValue);
-        }}
         onChange={handleDrag}
+        onPointerUp={(e) => {
+          handleDrop(Number(e.currentTarget.value));
+        }}
       />
     </div>
   );

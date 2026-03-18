@@ -36,7 +36,7 @@
   font-weight: bold;
   font-size: 1.1rem;
   color: var(--light);
-  background-color: var(--dark);
+  background-color: var(--primary-color);
   width: max-content;
 
   border-radius: 8px;

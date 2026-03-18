@@ -11,7 +11,6 @@ export function ConfigProvider({ children }: { children: React.ReactNode }) {
       const response = await fetch("/set-up");
       if (!response.ok) throw new Error("Failed to fetch config");
       const data = await response.json();
-      console.log(data);
       setConfig(data);
     };
     fetchConfig();

@@ -12,9 +12,15 @@ interface MovieSelectionProps {
   movies: MovieData[];
   layout?: "grid" | "list";
   display?: "quality" | "entertainment" | "combined" | "diff";
+  triggerResort: () => void;
 }
 
-function MovieSelection({ movies, layout, display }: MovieSelectionProps) {
+function MovieSelection({
+  movies,
+  layout,
+  display,
+  triggerResort,
+}: MovieSelectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
 
@@ -32,7 +38,6 @@ function MovieSelection({ movies, layout, display }: MovieSelectionProps) {
         }
 
         const data = await response.json();
-        console.log(data);
         setIsModalOpen(true);
         setMovieDetails(data);
       } catch (error) {
@@ -124,7 +129,10 @@ function MovieSelection({ movies, layout, display }: MovieSelectionProps) {
             <button className={styles.closeBtn} onClick={closeModal}>
               <img src={Cross} alt="cross icon" />
             </button>
-            <MovieModal movieDetails={movieDetails} />
+            <MovieModal
+              movieDetails={movieDetails}
+              triggerResort={triggerResort}
+            />
           </div>
         </div>
       )}

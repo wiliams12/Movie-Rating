@@ -3,9 +3,12 @@ import styles from "./Footer.module.css";
 function Footer() {
   return (
     <footer className={styles.footer}>
-      <a className={styles.Item} href="mailto:vilem.ucik@gmail.com">
-        vilem.ucik@gmail.com
-      </a>
+      <div className={`${styles.Item} ${styles.Container}`}>
+        <a href="mailto:vilem.ucik@gmail.com">vilem.ucik@gmail.com</a>
+        <a href="https://github.com/wiliams12" target="_blank">
+          GitHub
+        </a>
+      </div>
       <p className={styles.Item}>
         &copy; 2026 Vilém Učík. All rights reserved.
       </p>

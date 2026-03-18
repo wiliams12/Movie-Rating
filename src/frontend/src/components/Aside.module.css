@@ -26,6 +26,7 @@
 }
 
 .heading {
+  border-bottom: 3px solid var(--secondary-low-contrast);
 }
 
 .text {

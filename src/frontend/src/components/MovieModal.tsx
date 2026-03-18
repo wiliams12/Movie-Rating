@@ -12,9 +12,10 @@ import ISO6391 from "iso-639-1";
 
 interface MovieModalProps {
   movieDetails: MovieDetails;
+  triggerResort: () => void;
 }
 
-function MovieModal({ movieDetails }: MovieModalProps) {
+function MovieModal({ movieDetails, triggerResort }: MovieModalProps) {
   const { getImageUrl } = useConfig();
   const profitString = (
     (movieDetails.revenue - movieDetails.budget) /
@@ -29,11 +30,13 @@ function MovieModal({ movieDetails }: MovieModalProps) {
         return (value: number) => {
           movieDetails.user_rating_quality = value;
           storeMovie(movieDetails);
+          triggerResort();
         };
       case "entertainment":
         return (value: number) => {
           movieDetails.user_rating_entertainment = value;
           storeMovie(movieDetails);
+          triggerResort();
         };
     }
   };

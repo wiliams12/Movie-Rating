@@ -12,8 +12,8 @@ function Aside() {
         rating essentialy everything. <br></br>The distinction I made is that
         there is a second axis for every movie, you can image it as a plane.
       </p>
-      <h3>Example:</h3>
-      <p>
+      <h3 className={styles.heading}>Example:</h3>
+      <p className={styles.text}>
         I will be using the rating from IMDB (17.3.2026).<br></br>
         <i>Harry Potter and the Deathly Hallows: Part 2</i> has 8.1 stars, which
         is quite a lot.<br></br> This is only my personal opinion, but maybe

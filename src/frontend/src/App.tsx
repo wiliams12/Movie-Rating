@@ -10,6 +10,7 @@ import Cross from "./assets/cross.png";
 import styles from "./App.module.css";
 import Utils from "./components/Utils";
 import Plane from "./components/Plane";
+import ImportExport from "./components/ImportExport";
 
 const ViewMap: Record<string, React.ElementType> = {
   graph: Plane,
@@ -22,15 +23,14 @@ export function useViewManager(
   initialView: string = "default",
 ) {
   const [dataState, setDataState] = useState<string>(initialView);
-
   const [sortState, setSortState] = useState<string>("none");
-
   const [isReverted, setIsReverted] = useState<boolean>(false);
 
   const displayedMovies = useMemo(() => {
     const movieClone = [...rawMovies];
 
     if (sortState === "none") {
+      // Keep default order
     } else if (sortState === "quality") {
       movieClone.sort(
         (a, b) => (b.user_rating_quality ?? 0) - (a.user_rating_quality ?? 0),
@@ -59,7 +59,6 @@ export function useViewManager(
         const diffB = Math.abs(
           b.voteAverage * 10 - (b.user_rating_quality ?? 0),
         );
-
         return diffB - diffA;
       });
     }
@@ -90,6 +89,7 @@ function App() {
   const [isReady, setIsReady] = useState(false);
   const [isAsidePopupOpen, setIsAsidePopupOpen] = useState(true);
   const [isSearch, setIsSearch] = useState(false);
+
   const {
     dataState,
     setDataState,
@@ -105,7 +105,6 @@ function App() {
     async function setup() {
       await initDB();
       const savedMovies = await getAllMovies();
-      console.log(savedMovies);
       setMovies(savedMovies);
       setIsReady(true);
     }
@@ -126,7 +125,7 @@ function App() {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  });
+  }, [isAsidePopupOpen]);
 
   const handleSearchMovie = async (query: string) => {
     try {
@@ -148,6 +147,12 @@ function App() {
     }
   };
 
+  const triggerResort = async () => {
+    const updatedMovies = await getAllMovies();
+
+    setMovies(updatedMovies);
+  };
+
   if (!isReady) return <div>Loading Database...</div>;
 
   return (
@@ -158,6 +163,10 @@ function App() {
             handleSearchMovie(query);
           }}
         />
+        <div className={styles.ImportExport}>
+          <ImportExport type="import" />
+          <ImportExport type="export" />
+        </div>
       </Header>
       <main className={styles.main}>
         <div className={styles.Content}>
@@ -174,6 +183,7 @@ function App() {
             movies={displayedMovies}
             layout={dataState}
             display={sortState}
+            triggerResort={triggerResort}
           />
         </div>
 

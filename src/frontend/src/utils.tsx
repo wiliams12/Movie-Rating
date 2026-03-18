@@ -58,7 +58,6 @@ export function buildImageUrl(
 }
 
 export function getFlagEmoji(countryCode: string) {
-  console.log(countryCode);
   if (!countryCode || countryCode.length !== 2) return "";
 
   const codePoints = countryCode
