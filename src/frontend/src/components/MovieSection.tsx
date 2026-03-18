@@ -55,7 +55,7 @@ function MovieSelection({ movies, layout, display }: MovieSelectionProps) {
       case "diff":
         return (item.user_rating_quality - item.voteAverage * 10).toFixed(2);
       default:
-        return "";
+        return "----";
     }
   };
 
@@ -100,7 +100,10 @@ function MovieSelection({ movies, layout, display }: MovieSelectionProps) {
                 display={String(getDisplayValue(display, item))}
               />
             ) : (
-              <MovieCard movieData={item} display={""} />
+              <MovieCard
+                movieData={item}
+                display={String(getDisplayValue(display, item))}
+              />
             )}
           </li>
         ))}

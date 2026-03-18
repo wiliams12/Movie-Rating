@@ -20,6 +20,7 @@ function MovieCard({ movieData, display }: Props) {
       <h3 className={styles.movieHeading}>
         <span className={styles.title}>{movieData.title}</span>
         <span className={styles.releaseDate}>{movieData.releaseDate}</span>
+        <span className={styles.Display}>{display ?? "#"}</span>
       </h3>
       <p className={styles.overview}>{movieData.overview}</p>
       <div className={styles.breaker}></div>

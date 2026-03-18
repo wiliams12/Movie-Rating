@@ -14,32 +14,38 @@
 .movieHeading {
   display: grid;
   grid-template-columns: 3fr 1fr;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.6rem;
   padding: 0.2rem 0.3rem;
   margin: 0.2rem 0.2rem;
   border-bottom: 2px solid var(--secondary-low-contrast);
-  gap: 1rem;
   height: 3.5rem;
 }
 
 .title {
   font-size: 1.1rem;
-
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   line-clamp: 2;
   overflow: hidden;
+  grid-row: 1 / -1;
 }
 
 .releaseDate {
-  white-space: nowrap;
-  font-size: 0.9rem;
-  line-height: 1.2rem;
   color: var(--secondary-high-contrast);
   border: 2px solid var(--secondary-high-contrast);
-  height: 1.6rem;
+}
+
+.releaseDate,
+.Display {
   padding: 0.2rem;
   border-radius: 0.2rem;
+  grid-column: 2;
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+  white-space: nowrap;
+  height: 1.6rem;
 }
 
 .overview {
@@ -60,4 +66,13 @@
   margin: auto 0.2rem;
   margin-top: 1rem;
   height: 4px;
+}
+
+.Display {
+  background-color: var(--primary-color);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  color: var(--light);
+  grid-row: 2;
+  width: max-content;
+  margin: auto;
 }

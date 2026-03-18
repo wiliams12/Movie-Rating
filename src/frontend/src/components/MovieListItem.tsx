@@ -13,7 +13,7 @@ function MovieListItem({ movieData, display }: Props) {
         <span className={styles.title}>{movieData.title}</span>
         <span className={styles.releaseDate}>{movieData.releaseDate}</span>
       </h3>
-      <p>{display}</p>
+      <p className={styles.Display}>{display}</p>
     </div>
   );
 }

@@ -16,3 +16,18 @@
   display: flex;
   flex-direction: column;
 }
+
+.Display {
+  background-color: var(--primary-color);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.4);
+  color: var(--light);
+  grid-row: 2;
+  width: max-content;
+  margin-right: 0;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+  white-space: nowrap;
+  height: 1.6rem;
+}

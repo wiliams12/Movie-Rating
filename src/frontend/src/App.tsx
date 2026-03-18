@@ -23,14 +23,15 @@ export function useViewManager(
 ) {
   const [dataState, setDataState] = useState<string>(initialView);
 
-  const [sortState, setSortState] = useState<string>("default");
+  const [sortState, setSortState] = useState<string>("none");
 
   const [isReverted, setIsReverted] = useState<boolean>(false);
 
   const displayedMovies = useMemo(() => {
     const movieClone = [...rawMovies];
 
-    if (sortState === "quality") {
+    if (sortState === "none") {
+    } else if (sortState === "quality") {
       movieClone.sort(
         (a, b) => (b.user_rating_quality ?? 0) - (a.user_rating_quality ?? 0),
       );
@@ -138,6 +139,7 @@ function App() {
       const data = await response.json();
       setMovies(data);
       setIsSearch(true);
+      setSortState("none");
       if (dataState === "graph") {
         setDataState("default");
       }
