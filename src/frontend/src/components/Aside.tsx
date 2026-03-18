@@ -1,44 +1,73 @@
 import styles from "./Aside.module.css";
+
 function Aside() {
   return (
     <aside className={styles.aside}>
       <h2 className={styles.heading}>About</h2>
       <p className={styles.text}>
-        This app allows you to search and rate movies, and then display useful
-        statistics and insights. <br></br>The rating system comes from an idea
-        that not all movies are the same and that their overall "quality" cannot
-        be described by one characteristic. <br></br>Of course there has to be a
-        characteristic for quality, basicaly what everyone is used to when
-        rating essentialy everything. <br></br>The distinction I made is that
-        there is a second axis for every movie, you can image it as a plane.
+        This app allows you to search, rate, and analyze movies through detailed
+        statistics and visual insights. <br />
+        The core rating system is built on the premise that a movie's overall
+        &quot;quality&quot; cannot be defined by a single metric. While
+        traditional systems rely on one universal score, this application
+        introduces a two-dimensional rating plane. Every movie is evaluated on
+        two distinct axes: Quality (objective filmmaking, screenplay, acting)
+        and Entertainment (subjective enjoyment, pacing, fun factor).
       </p>
-      <h3 className={styles.heading}>Example:</h3>
+
+      <h3 className={styles.heading}>The Flaw in the 1D Scale:</h3>
       <p className={styles.text}>
-        I will be using the rating from IMDB (17.3.2026).<br></br>
-        <i>Harry Potter and the Deathly Hallows: Part 2</i> has 8.1 stars, which
-        is quite a lot.<br></br> This is only my personal opinion, but maybe
-        even you might feel that it has some drawbacks, when watching the film,
-        I always get the feelings that it is too fast-paced, that something in
-        the screenplay is off. <br></br>Yet it has the same rating as many other
-        films that I personallu consider masterpieces (you may not, but I hope
-        that at least one of them makes you consider this theory):{" "}
+        Consider the IMDb ratings (as of March 2026).{" "}
+        <i>Harry Potter and the Deathly Hallows: Part 2</i> sits at an
+        impressive 8.1 stars. <br />
+        While it is a great movie, some might argue the screenplay has pacing
+        issues or structural flaws. Yet, it shares the exact same 8.1 rating as
+        films widely considered cinematic masterpieces:{" "}
         <i>Dead Poets Society</i>, <i>Million Dollar Baby</i>,{" "}
-        <i>My Neighbor Totoro</i>, <i>Gran Torino</i>, <i>Ratatouille</i>,{" "}
-        <i>Gone Girl</i>, <i>Jaws</i>, <i>The Deer Hunter</i> or <i>Ben-Hur</i>,
-        which had won 11 oscars. <br></br>Why I think that it has such a high
-        rating is that even though the "quality" might be lover than the other
-        films with same rating, it is more fun, nostalgic, epic... It is the
-        grand finale of a series many people had grew up with. <br></br>And
-        because everyone uses only one rating system, viewers unconsiously put
-        these emotions into the singular rating. <br></br>But if we introduce
-        other axis, we can now distinguish between more aspects of the movie.
-        Giving justice to heartfelt flicks that deserve to have a better quality
-        that some blockbusters. <br></br>This model that computes the overall
-        "rating" so overall, those movies can still have better ratings, but the
-        rooted "quality" rating won't disappear.
+        <i>Gran Torino</i>, <i>Ratatouille</i>, <i>Gone Girl</i>, <i>Jaws</i>,
+        or the 11-time Oscar winner <i>Ben-Hur</i>. <br />
+        Why does it score so highly? Because it is incredibly fun, nostalgic,
+        and epic—it is the grand finale of a beloved series. When viewers are
+        restricted to a single rating slider, they subconsciously merge their
+        objective critique with their emotional enjoyment. <br />
+        By introducing a second axis, we separate these aspects. This system
+        does justice to structurally brilliant films without punishing highly
+        entertaining blockbusters, providing a much more accurate reflection of
+        how we actually experience cinema.
       </p>
-      <h2 className={styles.heading}>How to use?</h2>
-      <p className={styles.text}></p>
+
+      <h2 className={styles.heading}>How to use</h2>
+      <p className={styles.text}>
+        Search for a movie (note: searching by actor or director is not
+        currently supported).
+        <br />
+        Then you can rate the ones you&apos;ve seen, and they will be stored
+        securely on your device. You can display different statistics directly
+        from there.
+        <br />
+        <br />
+        You can adjust the display of your saved films from the utility bar:
+      </p>
+      <ul>
+        <li>default - a standard grid view</li>
+        <li>
+          list - a compact view, ideal for quickly scanning large libraries
+        </li>
+        <li>graph - displays your movies plotted on a 2D plane</li>
+        <li>invert - toggles between ascending and descending order</li>
+        <li>quality - sorts strictly by the objective quality axis</li>
+        <li>
+          entertainment - sorts strictly by the subjective entertainment axis
+        </li>
+        <li>
+          combined - uses the geometric mean (the square root of quality ×
+          entertainment) to calculate a balanced score
+        </li>
+        <li>
+          difference - calculates the oscillation between your personal rating
+          and the TMDB global average
+        </li>
+      </ul>
     </aside>
   );
 }
