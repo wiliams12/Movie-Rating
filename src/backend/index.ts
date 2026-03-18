@@ -33,7 +33,8 @@ app.get("/search", async (req: Request, res: Response) => {
       overview: movie.overview,
       releaseDate: movie.release_date,
       user_rating_quality: null,
-      user_rating_entertainment: null
+      user_rating_entertainment: null,
+      voteAverage: movie.vote_average,
     }));
     res.json(formattedResults);
   } catch (error) {

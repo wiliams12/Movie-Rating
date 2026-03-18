@@ -25,20 +25,50 @@ export function useViewManager(
 
   const [sortState, setSortState] = useState<string>("default");
 
+  const [isReverted, setIsReverted] = useState<boolean>(false);
+
   const displayedMovies = useMemo(() => {
     const movieClone = [...rawMovies];
 
-    if (sortState === "rating") {
-      return movieClone.sort(
-        (a, b) => b.user_rating_quality - a.user_rating_quality,
+    if (sortState === "quality") {
+      movieClone.sort(
+        (a, b) => (b.user_rating_quality ?? 0) - (a.user_rating_quality ?? 0),
       );
+    } else if (sortState === "entertainment") {
+      movieClone.sort(
+        (a, b) =>
+          (b.user_rating_entertainment ?? 0) -
+          (a.user_rating_entertainment ?? 0),
+      );
+    } else if (sortState === "combined") {
+      movieClone.sort((a, b) => {
+        const scoreA = Math.sqrt(
+          (a.user_rating_quality ?? 0) * (a.user_rating_entertainment ?? 0),
+        );
+        const scoreB = Math.sqrt(
+          (b.user_rating_quality ?? 0) * (b.user_rating_entertainment ?? 0),
+        );
+        return scoreB - scoreA;
+      });
+    } else if (sortState === "diff") {
+      movieClone.sort((a, b) => {
+        const diffA = Math.abs(
+          a.voteAverage * 10 - (a.user_rating_quality ?? 0),
+        );
+        const diffB = Math.abs(
+          b.voteAverage * 10 - (b.user_rating_quality ?? 0),
+        );
+
+        return diffB - diffA;
+      });
     }
 
-    if (sortState === "alphabetical") {
-      return movieClone.sort((a, b) => a.title.localeCompare(b.title));
+    if (isReverted) {
+      movieClone.reverse();
     }
+
     return movieClone;
-  }, [rawMovies, sortState]);
+  }, [rawMovies, sortState, isReverted]);
 
   const ActiveView = ViewMap[dataState] || ViewMap.default;
 
@@ -47,6 +77,8 @@ export function useViewManager(
     setDataState,
     sortState,
     setSortState,
+    isReverted,
+    setIsReverted,
     ActiveView,
     displayedMovies,
   };
@@ -57,10 +89,16 @@ function App() {
   const [isReady, setIsReady] = useState(false);
   const [isAsidePopupOpen, setIsAsidePopupOpen] = useState(true);
   const [isSearch, setIsSearch] = useState(false);
-  const { dataState, setDataState, ActiveView } = useViewManager(
-    movies,
-    "default",
-  );
+  const {
+    dataState,
+    setDataState,
+    sortState,
+    setSortState,
+    ActiveView,
+    displayedMovies,
+    isReverted,
+    setIsReverted,
+  } = useViewManager(movies, "default");
 
   useEffect(() => {
     async function setup() {
@@ -122,9 +160,19 @@ function App() {
       <main className={styles.main}>
         <div className={styles.Content}>
           <div className={styles.Utilities}>
-            <Utils changeState={setDataState} isSearch={isSearch} />
+            <Utils
+              changeState={setDataState}
+              changeSort={setSortState}
+              isSearch={isSearch}
+              isReverted={isReverted}
+              changeReverse={setIsReverted}
+            />
           </div>
-          <ActiveView movies={movies} layout={dataState} />
+          <ActiveView
+            movies={displayedMovies}
+            layout={dataState}
+            display={sortState}
+          />
         </div>
 
         <div className={styles.btnWrapper}>

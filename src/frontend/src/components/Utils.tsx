@@ -2,10 +2,19 @@ import styles from "./Utils.module.css";
 
 interface Props {
   changeState: (value: string) => void;
+  changeSort: (value: string) => void;
+  changeReverse: (value: boolean) => void;
   isSearch: boolean;
+  isReverted: boolean;
 }
 
-function Utils({ changeState, isSearch }: Props) {
+function Utils({
+  changeState,
+  changeSort,
+  changeReverse,
+  isReverted,
+  isSearch,
+}: Props) {
   return (
     <ul className={styles.Bar}>
       <li className={styles.Item}>
@@ -21,8 +30,24 @@ function Utils({ changeState, isSearch }: Props) {
       ) : (
         ""
       )}
-
-      <li className={styles.Item}></li>
+      {/* vertical breaker */}
+      <li className={styles.Item}>
+        <button onClick={() => changeReverse(!isReverted)}>invert</button>
+      </li>
+      <li className={styles.Item}>
+        <button onClick={() => changeSort("quality")}>quality</button>
+      </li>
+      <li className={styles.Item}>
+        <button onClick={() => changeSort("entertainment")}>
+          entertainment
+        </button>
+      </li>
+      <li className={styles.Item}>
+        <button onClick={() => changeSort("combined")}>combined</button>
+      </li>
+      <li className={styles.Item}>
+        <button onClick={() => changeSort("diff")}>difference</button>
+      </li>
     </ul>
   );
 }

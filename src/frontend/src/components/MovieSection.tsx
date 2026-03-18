@@ -11,9 +11,10 @@ import MovieListItem from "./MovieListItem";
 interface MovieSelectionProps {
   movies: MovieData[];
   layout?: "grid" | "list";
+  display?: "quality" | "entertainment" | "combined" | "diff";
 }
 
-function MovieSelection({ movies, layout }: MovieSelectionProps) {
+function MovieSelection({ movies, layout, display }: MovieSelectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
 
@@ -37,6 +38,24 @@ function MovieSelection({ movies, layout }: MovieSelectionProps) {
       } catch (error) {
         console.error("Failed to retrive movie details.:", error);
       }
+    }
+  };
+
+  const getDisplayValue = (mode: string | undefined, item: MovieData) => {
+    switch (mode) {
+      case "quality":
+        return item.user_rating_quality ?? 0;
+      case "entertainment":
+        return item.user_rating_entertainment ?? 0;
+      case "combined":
+        return Math.sqrt(
+          (item.user_rating_quality ?? 0) *
+            (item.user_rating_entertainment ?? 0),
+        ).toFixed(2);
+      case "diff":
+        return (item.user_rating_quality - item.voteAverage * 10).toFixed(2);
+      default:
+        return "";
     }
   };
 
@@ -76,9 +95,12 @@ function MovieSelection({ movies, layout }: MovieSelectionProps) {
             role="button"
           >
             {layout === "list" ? (
-              <MovieListItem movieData={item} display={""} />
+              <MovieListItem
+                movieData={item}
+                display={String(getDisplayValue(display, item))}
+              />
             ) : (
-              <MovieCard movie={item} />
+              <MovieCard movieData={item} display={""} />
             )}
           </li>
         ))}
